@@ -76,7 +76,10 @@ function pwa_page_attachments(array &$attachments) {
   $settings = \Drupal::config('pwa.settings');
 
   $attachments['#attached']['library'][] = 'pwa/serviceworker';
-  $attachments['#attached']['drupalSettings']['pwa']['path'] = '/pwa/' . $settings->get('serviceworker_cache_version') . '/serviceworker.js';
+  $path = drupal_get_path('module', 'pwa');
+  $sw = $path . '/js/service-worker.js';
+  //$attachments['#attached']['drupalSettings']['pwa']['path'] = '/pwa/' . $settings->get('serviceworker_cache_version') . '/serviceworker.js';
+  $attachments['#attached']['drupalSettings']['pwa']['path'] = $sw;
   $attachments['#attached']['html_head'][] = [[
     '#tag' => 'link',
     '#attributes' => [
